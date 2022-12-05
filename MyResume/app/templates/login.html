@@ -1,0 +1,27 @@
+{% extends './index.html' %}
+
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="form-signin w-100 m-auto">
+    <form action="login" method="post">
+        <img class="mb-4" src="{{ url_for('static', filename='logo.png') }}" alt="logo" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Inicio de Sesion</h1>
+    
+        <div class="form-floating">
+          <input type="email" class="form-control" id="idUser" name="mail" placeholder="usuario@ejemplo.com" required>
+          <label for="floatingInput">Correo Electronico</label>
+        </div>
+    
+        <div class="form-floating">
+          <input type="password" class="form-control" id="idPasswd" name="passwd" placeholder="Contraseña" required>
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+    
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar Sesion</button>
+        <p class="mt-5 mb-3 text-muted">&copy; Proyecto Final, Eduardo Beltran Garcia</p>
+      </form>
+</main>
+{% endblock %}

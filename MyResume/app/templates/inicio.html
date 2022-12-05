@@ -1,0 +1,33 @@
+{% extends './index.html'%}
+
+{% block body %}
+
+<!-- ======= Mobile nav toggle button ======= -->
+<i class="bi bi-list mobile-nav-toggle d-lg-none"></i>
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex flex-column justify-content-center">
+  <nav id="navbar" class="navbar nav-menu">
+    <ul>
+      <li><a href="#" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
+      <li><a href="{{ url_for('sobreMi') }}" class="nav-link scrollto" role="button"><i class="bx bx-user"></i> <span>Sobre Mi</span></a></li>
+      <li><a href="{{ url_for('curriculum') }}" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Curriculum</span></a></li>
+    </ul>
+  </nav><!-- .nav-menu -->
+
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex flex-column justify-content-center" >
+  <div class="container" data-aos="zoom-in" data-aos-delay="100">
+    <h1>Eduardo Beltran</h1>
+    <p>Soy un <span class="typed" data-typed-items="Estudiante, Desarrollador, Fotografo, Skater"></span></p>
+    <div class="social-links">
+      <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+      <a href="instagram.com/pepperoni__playboy_" class="instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="https://github.com/Eduardo-bg01" class="github"><i class="bx bxl-github"></i></a>
+    </div>
+  </div>
+</section><!-- End Hero -->
+
+{% endblock %}
