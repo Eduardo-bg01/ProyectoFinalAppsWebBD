@@ -39,16 +39,17 @@ ProyectoFinalAppsWebBD/
 3. **Install the dependencies**:
     pip install -r requirements.txt
 
-Configuration
+## Configuration
 Update the config.py file with your database configuration and other settings.
 
-Running the Application
-Activate the virtual environment:
+## Running the Application
+1. **Activate the virtual environment***:
     .\venv\Scripts\activate
-Run the application:
+
+2. **Run the application**:
     python -m app.app
 
-Dependencies
-Flask
-Flask-SQLAlchemy
-MySQLclient or PyMySQL
+## Dependencies
+    Flask
+    Flask-SQLAlchemy
+    MySQLclient and PyMySQL
