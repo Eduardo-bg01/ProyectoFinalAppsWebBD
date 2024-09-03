@@ -1,9 +1,9 @@
-from app import create_app
-from flask import render_template, request, redirect, sessions
-from app.migrate import init_db
-from app.models import *
+from . import create_app
+from flask import render_template, request, redirect, session
+from .migrate import init_db
+from .models import Usuarios, Informacion, Experiencia, db
 
-app=create_app()
+app = create_app()
 
 @app.route('/')
 def index():
@@ -12,18 +12,12 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST' and 'mail' in request.form and 'passwd' in request.form:
-
         mail = request.form['mail']
         passwd = request.form['passwd']
 
-        mail = Usuarios.query.filter_by(mail=mail).first()
-        if mail != None:
-            mail = Usuarios.query.filter_by(passwd=passwd).first()
-
-            if mail != None:
-                return render_template('inicio.html')
-            else:
-                return render_template('login.html')
+        user = Usuarios.query.filter_by(mail=mail).first()
+        if user and user.passwd == passwd:
+            return render_template('inicio.html')
         else:
             return render_template('login.html')
     return render_template('login.html')
@@ -44,30 +38,29 @@ def curriculum():
 
 @app.route('/agregarExperienciaLaboral', methods=['GET', 'POST'])
 def agregarExperienciaLaboral():
-    exp =Experiencia(
+    exp = Experiencia(
         lugar=request.form["lugar"],
         tiempoInicio=request.form["tiempoInicio"],
         tiempoFinal=request.form["tiempoFinal"],
         puesto=request.form["puesto"],
         descripcion=request.form["descripcion"]
-        )   
+    )
     db.session.add(exp)
     db.session.commit()
-    
+
     experiencias = Experiencia.query.all()
     return render_template('curriculum.html', experiencias=experiencias)
 
 @app.route('/actualizarInformacion', methods=['POST'])
 def actualizar():
-    idB= request.form.get('id')
+    idB = request.form.get('id')
     telefonoN = request.form.get('phone')
     ciudadN = request.form.get('city')
     edadN = request.form.get('age')
     gradoN = request.form.get('GE')
     freeN = request.form.get('FL')
 
-
-    infor=Informacion.query.filter_by(idinfo=idB).first()
+    infor = Informacion.query.filter_by(idinfo=idB).first()
     infor.idinfo = idB
     infor.telefono = telefonoN
     infor.ciudad = ciudadN
@@ -79,7 +72,6 @@ def actualizar():
 
     informacion = Informacion.query.all()
     return render_template('sobreMi.html', informacion=informacion)
-    
 
 @app.route('/borrarExperiencia', methods=['POST'])
 def borrarExperiencia():
@@ -91,7 +83,5 @@ def borrarExperiencia():
     experiencias = Experiencia.query.all()
     return render_template('curriculum.html', experiencias=experiencias)
 
-
-
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(debug=True, port=5000)
